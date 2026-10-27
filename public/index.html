@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GolazoKits | Viste la Pasión de Tu Equipo</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@500;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            green: '#10b981',
+                            darkGreen: '#059669',
+                            pitch: '#064e3b',
+                            gold: '#f59e0b',
+                            neon: '#22c55e',
+                            dark: '#0f172a',
+                            card: '#1e293b'
+                        }
+                    },
+                    fontFamily: {
+                        display: ['Teko', 'sans-serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gold-glow {
+            box-shadow: 0 0 25px -5px rgba(245, 158, 11, 0.4);
+        }
+        .green-glow {
+            box-shadow: 0 0 30px -5px rgba(34, 197, 94, 0.3);
+        }
+        .bg-grid-pattern {
+            background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #10b981;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 font-sans antialiased selection:bg-brand-green selection:text-slate-950 overflow-x-hidden">
+
+    <!-- BARRA NOTIFICACIÓN SUPERIOR -->
+    <div class="bg-gradient-to-r from-brand-pitch via-brand-darkGreen to-emerald-900 text-white text-xs font-semibold py-2 px-4 text-center border-b border-emerald-500/20 flex items-center justify-center gap-2">
+        <i data-lucide="sparkles" class="w-4 h-4 text-brand-gold animate-pulse"></i>
+        <span>¡OFERTA DE TEMPORADA! Envíos gratis en compras mayores a $999 MXN | 10% Extra con el código: <span class="text-brand-gold font-bold">GOLAZO2026</span></span>
+    </div>
+
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="sticky top-0 z-40 bg-slate-950/85 backdrop-blur-md border-b border-slate-800 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                
+                <!-- LOGO -->
+                <a href="#" class="flex items-center gap-2 group">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-green to-brand-gold flex items-center justify-center text-slate-950 font-bold text-xl group-hover:scale-105 transition-transform duration-300 shadow-lg shadow-brand-green/20">
+                        <i data-lucide="trophy" class="w-6 h-6 fill-current"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-display text-3xl font-bold tracking-wider leading-none text-white uppercase group-hover:text-brand-green transition-colors">
+                            GOLAZO<span class="text-brand-gold">KITS</span>
+                        </span>
+                        <span class="text-[9px] tracking-widest text-slate-400 uppercase font-semibold">Tienda Oficial de Jerseys</span>
+                    </div>
+                </a>
+
+                <!-- NAV DESKTOP -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#inicio" class="text-sm font-medium text-white hover:text-brand-green transition-colors py-1 relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-brand-green">Inicio</a>
+                    <a href="#ligas" class="text-sm font-medium text-slate-300 hover:text-brand-green transition-colors py-1">Ligas</a>
+                    <a href="#productos" class="text-sm font-medium text-slate-300 hover:text-brand-green transition-colors py-1">Populares</a>
+                    <a href="#personalizacion" class="text-sm font-medium text-slate-300 hover:text-brand-green transition-colors py-1 flex items-center gap-1">
+                        Personalizar <span class="bg-brand-gold/20 text-brand-gold text-[10px] px-1.5 py-0.5 rounded font-bold uppercase">Pro</span>
+                    </a>
+                    <a href="#beneficios" class="text-sm font-medium text-slate-300 hover:text-brand-green transition-colors py-1">Contacto</a>
+                </nav>
+
+                <!-- BOTONES ACCIONES -->
+                <div class="flex items-center space-x-4">
+                    <!-- Buscador -->
+                    <div class="relative hidden sm:block">
+                        <input type="text" id="searchInput" onkeyup="handleSearch(event)" placeholder="Buscar jersey, equipo..." class="w-48 lg:w-64 bg-slate-900 border border-slate-700 text-white text-xs rounded-full py-2 pl-9 pr-4 focus:outline-none focus:border-brand-green transition-all">
+                        <i data-lucide="search" class="w-4 h-4 text-slate-400 absolute left-3 top-2.5"></i>
+                    </div>
+
+                    <!-- Carrito con Badge -->
+                    <button id="openCartBtn" class="p-2.5 text-slate-300 hover:text-brand-green hover:bg-slate-900 rounded-full transition-colors relative" title="Carrito">
+                        <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                        <span id="cartCountBadge" class="absolute -top-1 -right-1 bg-brand-gold text-slate-950 text-xs font-extrabold w-5 h-5 rounded-full flex items-center justify-center transform scale-0 transition-transform duration-300">0</span>
+                    </button>
+
+                    <!-- Botón Mobile Menu -->
+                    <button id="mobileMenuBtn" class="md:hidden p-2.5 text-slate-300 hover:text-white hover:bg-slate-900 rounded-xl">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MENÚ MÓVIL DESPLEGABLE -->
+        <div id="mobileMenu" class="hidden md:hidden bg-slate-900 border-b border-slate-800 px-4 pt-2 pb-6 space-y-3">
+            <div class="mb-3">
+                <input type="text" onkeyup="handleSearch(event)" placeholder="Buscar jersey, equipo..." class="w-full bg-slate-950 border border-slate-700 text-white text-xs rounded-xl py-2.5 px-4 focus:outline-none focus:border-brand-green">
+            </div>
+            <a href="#inicio" class="block px-3 py-2.5 rounded-lg text-base font-semibold text-brand-green bg-slate-800/50">Inicio</a>
+            <a href="#ligas" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Ligas</a>
+            <a href="#productos" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Populares</a>
+            <a href="#personalizacion" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Personalizar Jersey</a>
+            <a href="#beneficios" class="block px-3 py-2.5 rounded-lg text-base font-medium text-slate-300 hover:text-white hover:bg-slate-800">Contacto & Garantía</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="inicio" class="relative overflow-hidden pt-12 pb-20 lg:pt-20 lg:pb-32 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-96 bg-gradient-to-r from-emerald-600/10 via-brand-green/20 to-amber-500/10 blur-[120px] pointer-events-none"></div>
+        <div class="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                
+                <!-- TEXTO HERO -->
+                <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/90 border border-brand-green/30 text-brand-green text-xs font-bold uppercase tracking-wider shadow-sm">
+                        <span class="w-2 h-2 rounded-full bg-brand-green animate-ping"></span>
+                        Jerseys 100% Auténticos y Garantizados
+                    </div>
+                    
+                    <h1 class="font-display text-5xl sm:text-7xl lg:text-8xl font-bold tracking-tight text-white uppercase leading-none">
+                        VISTE LA <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-green via-emerald-400 to-brand-gold">PASIÓN</span> DE TU EQUIPO
+                    </h1>
+                    
+                    <p class="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                        Explora la colección de la temporada 2025/2026. Versiones <b>Jugador Authentics</b> y <b>Aficionado Premium</b> con estampados oficiales de tus jugadores preferidos.
+                    </p>
+
+                    <!-- CTAs -->
+                    <div class="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
+                        <a href="#productos" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-gradient-to-r from-brand-green to-brand-darkGreen hover:from-emerald-400 hover:to-brand-green text-slate-950 font-extrabold text-base uppercase tracking-wider flex items-center justify-center gap-3 transition-all duration-300 transform hover:-translate-y-1 shadow-lg shadow-brand-green/30 group">
+                            <span>Explorar Colección</span>
+                            <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
+                        </a>
+                        <a href="#personalizacion" class="w-full sm:w-auto px-8 py-4 rounded-xl bg-slate-900 hover:bg-slate-800 text-white border border-slate-700 font-bold text-base flex items-center justify-center gap-2 transition-all">
+                            <i data-lucide="wand-2" class="w-5 h-5 text-brand-gold"></i>
+                            <span>Personalizar Jersey</span>
+                        </a>
+                    </div>
+
+                    <!-- Badges de confianza -->
+                    <div class="pt-8 grid grid-cols-3 gap-4 border-t border-slate-800/80 text-left">
+                        <div class="flex items-center gap-3">
+                            <div class="p-2 rounded-lg bg-slate-900 border border-slate-800 text-brand-green">
+                                <i data-lucide="truck" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold text-white uppercase">Envío Gratis</h4>
+                                <p class="text-[11px] text-slate-400">A todo el país</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="p-2 rounded-lg bg-slate-900 border border-slate-800 text-brand-gold">
+                                <i data-lucide="check-circle-2" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold text-white uppercase">100% Auténticos</h4>
+                                <p class="text-[11px] text-slate-400">Calidad Oficial</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="p-2 rounded-lg bg-slate-900 border border-slate-800 text-emerald-400">
+                                <i data-lucide="shield-check" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xs font-bold text-white uppercase">Garantía Total</h4>
+                                <p class="text-[11px] text-slate-400">Devolución fácil</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BANNER VISUAL -->
+                <div class="lg:col-span-5 relative">
+                    <div class="relative mx-auto max-w-md lg:max-w-none">
+                        <div class="relative bg-gradient-to-br from-slate-900 to-slate-950 p-4 sm:p-6 rounded-3xl border border-slate-800 shadow-2xl green-glow">
+                            <div class="absolute -top-4 -right-4 z-20 bg-brand-gold text-slate-950 px-4 py-1.5 rounded-full text-xs font-extrabold uppercase shadow-lg flex items-center gap-1.5">
+                                <i data-lucide="flame" class="w-4 h-4 fill-current"></i> Top Seller 2026
+                            </div>
+
+                            <div class="relative overflow-hidden rounded-2xl bg-slate-900 aspect-square flex items-center justify-center group">
+                                <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&q=80&w=800" 
+                                     alt="Jerseys Destacados" 
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent"></div>
+                                
+                                <div class="absolute bottom-4 left-4 right-4 p-4 rounded-xl bg-slate-900/90 backdrop-blur-md border border-slate-800 flex justify-between items-center">
+                                    <div>
+                                        <p class="text-xs font-semibold text-brand-green uppercase">Kit Local 25/26</p>
+                                        <h3 class="text-lg font-bold text-white">Edición Champions</h3>
+                                    </div>
+                                    <span class="text-xl font-extrabold text-brand-gold">$1,499 MXN</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CATEGORÍAS / LIGAS -->
+    <section id="ligas" class="py-16 bg-slate-900/50 border-y border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h2 class="font-display text-4xl sm:text-5xl font-bold tracking-wide uppercase text-white">
+                    EXPLORA POR <span class="text-brand-green">LIGAS Y COMPETICIONES</span>
+                </h2>
+                <p class="text-slate-400 text-sm sm:text-base">Haz clic en la liga de tu preferencia para filtrar nuestro catálogo disponible.</p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                <button onclick="filterLeague('Premier')" class="league-card group p-5 rounded-2xl bg-slate-900 border border-slate-800 hover:border-brand-green transition-all duration-300 text-center flex flex-col items-center justify-center gap-3 hover:-translate-y-1">
+                    <div class="w-14 h-14 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-brand-green/20 group-hover:text-brand-green text-slate-300 transition-colors">
+                        <i data-lucide="zap" class="w-7 h-7"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-sm group-hover:text-brand-green transition-colors">Premier League</h3>
+                        <p class="text-[11px] text-slate-500 uppercase font-semibold">Inglaterra</p>
+                    </div>
+                </button>
+
+                <button onclick="filterLeague('LaLiga')" class="league-card group p-5 rounded-2xl bg-slate-900 border border-slate-800 hover:border-brand-green transition-all duration-300 text-center flex flex-col items-center justify-center gap-3 hover:-translate-y-1">
+                    <div class="w-14 h-14 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-brand-green/20 group-hover:text-brand-green text-slate-300 transition-colors">
+                        <i data-lucide="crown" class="w-7 h-7"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-sm group-hover:text-brand-green transition-colors">LaLiga</h3>
+                        <p class="text-[11px] text-slate-500 uppercase font-semibold">España</p>
+                    </div>
+                </button>
+
+                <button onclick="filterLeague('SerieA')" class="league-card group p-5 rounded-2xl bg-slate-900 border border-slate-800 hover:border-brand-green transition-all duration-300 text-center flex flex-col items-center justify-center gap-3 hover:-translate-y-1">
+                    <div class="w-14 h-14 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-brand-green/20 group-hover:text-brand-green text-slate-300 transition-colors">
+                        <i data-lucide="shield" class="w-7 h-7"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-sm group-hover:text-brand-green transition-colors">Serie A</h3>
+                        <p class="text-[11px] text-slate-500 uppercase font-semibold">Italia</p>
+                    </div>
+                </button>
+
+                <button onclick="filterLeague('Selecciones')" class="league-card group p-5 rounded-2xl bg-slate-900 border border-slate-800 hover:border-brand-green transition-all duration-300 text-center flex flex-col items-center justify-center gap-3 hover:-translate-y-1">
+                    <div class="w-14 h-14 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-brand-green/20 group-hover:text-brand-green text-slate-300 transition-colors">
+                        <i data-lucide="flag" class="w-7 h-7"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-sm group-hover:text-brand-green transition-colors">Selecciones</h3>
+                        <p class="text-[11px] text-slate-500 uppercase font-semibold">Internacional</p>
+                    </div>
+                </button>
+
+                <button onclick="filterLeague('Retro')" class="league-card group p-5 rounded-2xl bg-slate-900 border border-slate-800 hover:border-brand-green transition-all duration-300 text-center flex flex-col items-center justify-center gap-3 hover:-translate-y-1 col-span-2 sm:col-span-1">
+                    <div class="w-14 h-14 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-brand-green/20 group-hover:text-brand-green text-slate-300 transition-colors">
+                        <i data-lucide="history" class="w-7 h-7"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-white text-sm group-hover:text-brand-green transition-colors">Ediciones Retro</h3>
+                        <p class="text-[11px] text-slate-500 uppercase font-semibold">Clásicos</p>
+                    </div>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTOS / CATÁLOGO -->
+    <section id="productos" class="py-20 bg-slate-950">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
+                <div>
+                    <span class="text-brand-green text-xs font-extrabold uppercase tracking-widest">Catálogo Actualizado</span>
+                    <h2 class="font-display text-4xl sm:text-5xl font-bold uppercase text-white mt-1">JERSEYS DESTACADOS 2025/2026</h2>
+                </div>
+
+                <!-- Filtros Interactivos -->
+                <div class="flex flex-wrap items-center gap-2" id="filterBar">
+                    <button onclick="filterProducts('all', event)" class="filter-btn active px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all bg-brand-green text-slate-950">Todos</button>
+                    <button onclick="filterProducts('Premier', event)" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800 border border-slate-800">Premier League</button>
+                    <button onclick="filterProducts('LaLiga', event)" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800 border border-slate-800">LaLiga</button>
+                    <button onclick="filterProducts('SerieA', event)" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800 border border-slate-800">Serie A</button>
+                    <button onclick="filterProducts('Selecciones', event)" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800 border border-slate-800">Selecciones</button>
+                    <button onclick="filterProducts('Retro', event)" class="filter-btn px-4 py-2 rounded-xl text-xs font-bold uppercase transition-all bg-slate-900 text-slate-400 hover:text-white hover:bg-slate-800 border border-slate-800">Retro</button>
+                </div>
+            </div>
+
+            <!-- GRID PRODUCTOS -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="productsGrid">
+                <!-- Carga dinámica vía JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- PERSONALIZACIÓN INTERACTIVA -->
+    <section id="personalizacion" class="py-20 bg-gradient-to-r from-slate-900 via-brand-pitch to-slate-900 relative overflow-hidden border-y border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <div class="space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-brand-gold/10 text-brand-gold border border-brand-gold/30 text-xs font-bold uppercase">
+                        <i data-lucide="sparkles" class="w-3.5 h-3.5"></i> Diseñador de Dorsales en Vivo
+                    </div>
+                    <h2 class="font-display text-4xl sm:text-6xl font-bold text-white uppercase leading-none">
+                        PERSONALIZA TU JERSEY OFICIAL
+                    </h2>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        Ingresa tu nombre, número favorito y escoge el color del estampado para visualizar cómo se verá el dorsal de tu camiseta con tipografía oficial de alta resistencia.
+                    </p>
+
+                    <!-- Formulario de Personalización -->
+                    <div class="p-6 rounded-2xl bg-slate-950/80 border border-slate-800 backdrop-blur-md space-y-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Nombre en Camiseta</label>
+                            <input type="text" id="customNameInput" placeholder="Ej. MODRIĆ" maxlength="12" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-brand-green uppercase font-bold">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 uppercase mb-1">Número de Dorsal</label>
+                            <input type="number" id="customNumberInput" placeholder="Ej. 10" min="1" max="99" class="w-full px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-700 text-white text-sm focus:outline-none focus:border-brand-green font-bold">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-300 uppercase mb-2">Color del Estampado</label>
+                            <div class="flex items-center gap-3">
+                                <button onclick="setDorsalColor('#ffffff')" class="w-8 h-8 rounded-full bg-white border-2 border-slate-500 focus:ring-2 focus:ring-brand-green transition-all" title="Blanco"></button>
+                                <button onclick="setDorsalColor('#f59e0b')" class="w-8 h-8 rounded-full bg-amber-500 border-2 border-slate-500 focus:ring-2 focus:ring-brand-green transition-all" title="Dorado"></button>
+                                <button onclick="setDorsalColor('#10b981')" class="w-8 h-8 rounded-full bg-emerald-500 border-2 border-slate-500 focus:ring-2 focus:ring-brand-green transition-all" title="Verde Neón"></button>
+                                <button onclick="setDorsalColor('#0f172a')" class="w-8 h-8 rounded-full bg-slate-900 border-2 border-slate-500 focus:ring-2 focus:ring-brand-green transition-all" title="Negro"></button>
+                            </div>
+                        </div>
+
+                        <button onclick="addCustomJerseyToCart()" class="w-full mt-2 py-3 bg-brand-gold hover:bg-amber-400 text-slate-950 font-extrabold text-sm uppercase rounded-xl transition-colors flex items-center justify-center gap-2">
+                            <i data-lucide="plus-circle" class="w-4 h-4"></i> Añadir Jersey Personalizado ($1,699 MXN)
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Preview Visual del Dorsal -->
+                <div class="relative flex justify-center">
+                    <div class="w-full max-w-md bg-slate-950 p-8 rounded-3xl border border-slate-800 shadow-2xl relative group flex flex-col items-center justify-center min-h-[400px] bg-gradient-to-b from-slate-900 to-slate-950">
+                        <div class="absolute inset-0 bg-brand-green/5 rounded-3xl"></div>
+                        
+                        <!-- Simulación Jersey -->
+                        <div class="relative w-full max-w-xs h-80 rounded-2xl bg-gradient-to-b from-emerald-900 to-slate-900 border border-emerald-500/30 p-6 flex flex-col items-center justify-center text-center shadow-inner overflow-hidden">
+                            <i data-lucide="shirt" class="w-16 h-16 text-slate-700/50 absolute top-4"></i>
+                            
+                            <!-- Nombre Personalizado -->
+                            <span id="previewName" class="font-display text-4xl sm:text-5xl font-bold tracking-wider uppercase drop-shadow-md transition-all text-white">TU NOMBRE</span>
+                            
+                            <!-- Número Personalizado -->
+                            <span id="previewNumber" class="font-display text-8xl font-extrabold tracking-tight drop-shadow-lg leading-none transition-all text-brand-gold">10</span>
+
+                            <div class="mt-4 flex items-center gap-2 text-[10px] text-emerald-400 font-bold uppercase tracking-widest bg-emerald-950/80 px-3 py-1 rounded-full border border-emerald-800">
+                                Tipografía Oficial 2026
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- BENEFICIOS / POR QUÉ ELEGIRNOS -->
+    <section id="beneficios" class="py-20 bg-slate-950">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-green text-xs font-extrabold uppercase tracking-widest">Garantía GolazoKits</span>
+                <h2 class="font-display text-4xl sm:text-5xl font-bold uppercase text-white mt-1">¿POR QUÉ ELEGIRNOS?</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                
+                <div class="p-8 rounded-2xl bg-slate-900 border border-slate-800 hover:border-brand-green/50 transition-all duration-300 text-center group">
+                    <div class="w-16 h-16 rounded-2xl bg-brand-green/10 text-brand-green flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="truck" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Envíos a todo el país</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Entregas exprés con número de rastreo en tiempo real mediante las mejores paqueterías.</p>
+                </div>
+
+                <div class="p-8 rounded-2xl bg-slate-900 border border-slate-800 hover:border-brand-green/50 transition-all duration-300 text-center group">
+                    <div class="w-16 h-16 rounded-2xl bg-brand-gold/10 text-brand-gold flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="award" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Calidad Premium</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Tejidos transpirables de alto rendimiento con escudos termosellados o bordados de alta definición.</p>
+                </div>
+
+                <div class="p-8 rounded-2xl bg-slate-900 border border-slate-800 hover:border-brand-green/50 transition-all duration-300 text-center group">
+                    <div class="w-16 h-16 rounded-2xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="check-check" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Estampado Oficial</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Tipografía y parches oficiales de torneos como UEFA Champions League y Copas Internacionales.</p>
+                </div>
+
+                <div class="p-8 rounded-2xl bg-slate-900 border border-slate-800 hover:border-brand-green/50 transition-all duration-300 text-center group">
+                    <div class="w-16 h-16 rounded-2xl bg-blue-500/10 text-blue-400 flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="rotate-ccw" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-2">Garantía de Devolución</h3>
+                    <p class="text-slate-400 text-sm leading-relaxed">Cuentas con 30 días para realizar cambios de talla o devoluciones sin costo extra.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIOS -->
+    <section class="py-20 bg-slate-900/40 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="text-brand-gold text-xs font-extrabold uppercase tracking-widest">Opiniones Reales</span>
+                <h2 class="font-display text-4xl sm:text-5xl font-bold uppercase text-white mt-1">TESTIMONIOS DE CLIENTES</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex text-brand-gold space-x-1">
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        </div>
+                        <p class="text-slate-300 text-sm italic">"Compré la camiseta del Real Madrid personalizada con el nombre de mi hijo. La calidad del estampado y la tela superaron mis expectativas totalmente."</p>
+                    </div>
+                    <div class="flex items-center gap-3 pt-6 border-t border-slate-800/80 mt-6">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center font-bold text-brand-green">
+                            CR
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-bold text-white">Carlos Ramírez</h4>
+                            <p class="text-xs text-slate-500">Comprador verificado</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex text-brand-gold space-x-1">
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        </div>
+                        <p class="text-slate-300 text-sm italic">"El envío a Guadalajara llegó súper rápido en tan solo 2 días. La jersey del Barça retro de los 90s tiene acabados impecables."</p>
+                    </div>
+                    <div class="flex items-center gap-3 pt-6 border-t border-slate-800/80 mt-6">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center font-bold text-brand-gold">
+                            MG
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-bold text-white">Mateo Gómez</h4>
+                            <p class="text-xs text-slate-500">Comprador verificado</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-6 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col justify-between">
+                    <div class="space-y-4">
+                        <div class="flex text-brand-gold space-x-1">
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                            <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        </div>
+                        <p class="text-slate-300 text-sm italic">"Muy buena atención al cliente por WhatsApp cuando tuve dudas con la talla. La versión jugador ajuste Slim Fit queda excelente."</p>
+                    </div>
+                    <div class="flex items-center gap-3 pt-6 border-t border-slate-800/80 mt-6">
+                        <div class="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center font-bold text-emerald-400">
+                            AH
+                        </div>
+                        <div>
+                            <h4 class="text-sm font-bold text-white">Alejandro Hernández</h4>
+                            <p class="text-xs text-slate-500">Comprador verificado</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-950 text-slate-400 text-sm border-t border-slate-900">
+        <!-- Newsletter banner integrado -->
+        <div class="border-b border-slate-900 py-12">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div>
+                    <h3 class="text-white font-display text-2xl font-bold uppercase">ÚNETE AL CLUB GOLAZOKITS</h3>
+                    <p class="text-xs text-slate-400">Recibe 10% de descuento en tu primera compra y noticias de nuevos jerseys.</p>
+                </div>
+                <form onsubmit="handleNewsletter(event)" class="flex w-full md:w-auto gap-2">
+                    <input type="email" required placeholder="Tu correo electrónico..." class="px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs focus:outline-none focus:border-brand-green w-full sm:w-64">
+                    <button type="submit" class="px-5 py-2.5 bg-brand-green hover:bg-emerald-400 text-slate-950 font-extrabold text-xs uppercase rounded-xl transition-colors whitespace-nowrap">Suscribirme</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+                
+                <div class="lg:col-span-2 space-y-4">
+                    <a href="#" class="flex items-center gap-2">
+                        <div class="w-9 h-9 rounded-xl bg-brand-green flex items-center justify-center text-slate-950 font-bold text-lg">
+                            <i data-lucide="trophy" class="w-5 h-5 fill-current"></i>
+                        </div>
+                        <span class="font-display text-2xl font-bold tracking-wider text-white uppercase">
+                            GOLAZO<span class="text-brand-gold">KITS</span>
+                        </span>
+                    </a>
+                    <p class="text-xs text-slate-400 leading-relaxed max-w-sm">
+                        Tu tienda de confianza para vestir los colores del equipo que amas. Pasión, autenticidad y calidad internacional garantizada.
+                    </p>
+                    <div class="flex space-x-4 pt-2">
+                        <a href="#" class="w-9 h-9 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-brand-green hover:border-brand-green transition-colors"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-brand-green hover:border-brand-green transition-colors"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                        <a href="#" class="w-9 h-9 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-300 hover:text-brand-green hover:border-brand-green transition-colors"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <h4 class="text-xs font-bold uppercase text-white tracking-widest">Navegación</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#inicio" class="hover:text-brand-green transition-colors">Inicio</a></li>
+                        <li><a href="#ligas" class="hover:text-brand-green transition-colors">Ligas</a></li>
+                        <li><a href="#productos" class="hover:text-brand-green transition-colors">Populares</a></li>
+                        <li><a href="#personalizacion" class="hover:text-brand-green transition-colors">Personalizar Jersey</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-3">
+                    <h4 class="text-xs font-bold uppercase text-white tracking-widest">Soporte & Ayuda</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#" class="hover:text-brand-green transition-colors">Preguntas Frecuentes</a></li>
+                        <li><a href="#" class="hover:text-brand-green transition-colors">Guía de Tallas</a></li>
+                        <li><a href="#" class="hover:text-brand-green transition-colors">Políticas de Envío</a></li>
+                        <li><a href="#" class="hover:text-brand-green transition-colors">Contacto</a></li>
+                    </ul>
+                </div>
+
+                <div class="space-y-3">
+                    <h4 class="text-xs font-bold uppercase text-white tracking-widest">Métodos de Pago</h4>
+                    <div class="flex flex-wrap gap-2 text-slate-300">
+                        <span class="px-2.5 py-1 bg-slate-900 border border-slate-800 rounded text-[10px] font-bold">VISA</span>
+                        <span class="px-2.5 py-1 bg-slate-900 border border-slate-800 rounded text-[10px] font-bold">MASTERCARD</span>
+                        <span class="px-2.5 py-1 bg-slate-900 border border-slate-800 rounded text-[10px] font-bold">PAYPAL</span>
+                        <span class="px-2.5 py-1 bg-slate-900 border border-slate-800 rounded text-[10px] font-bold">SPEI</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="pt-8 mt-12 border-t border-slate-900 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-4">
+                <p>&copy; 2026 GolazoKits Inc. Todos los derechos reservados.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-slate-400">Privacidad</a>
+                    <a href="#" class="hover:text-slate-400">Términos de Servicio</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- CARRITO DE COMPRAS DRAWER -->
+    <div id="cartModal" class="fixed inset-0 z-50 invisible transition-all duration-300">
+        <div id="cartOverlay" class="absolute inset-0 bg-slate-950/80 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
+
+        <div id="cartDrawer" class="absolute right-0 top-0 bottom-0 w-full max-w-md bg-slate-900 border-l border-slate-800 shadow-2xl flex flex-col transform translate-x-full transition-transform duration-300">
+            
+            <div class="p-5 border-b border-slate-800 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <i data-lucide="shopping-bag" class="w-5 h-5 text-brand-green"></i>
+                    <h3 class="font-bold text-white uppercase text-base">Tu Carrito de Compras</h3>
+                </div>
+                <button id="closeCartBtn" class="p-2 text-slate-400 hover:text-white rounded-lg hover:bg-slate-800">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-5 space-y-4">
+                <!-- Se poblará vía JavaScript -->
+            </div>
+
+            <div class="p-5 border-t border-slate-800 bg-slate-950 space-y-4">
+                <div class="space-y-1.5 text-xs">
+                    <div class="flex justify-between text-slate-400">
+                        <span>Subtotal</span>
+                        <span id="cartSubtotal" class="font-bold text-white">$0 MXN</span>
+                    </div>
+                    <div class="flex justify-between text-slate-400">
+                        <span>Envío</span>
+                        <span class="text-brand-green font-bold uppercase">¡Gratis!</span>
+                    </div>
+                    <div class="flex justify-between text-base font-bold text-white pt-2 border-t border-slate-800">
+                        <span>Total Estimado</span>
+                        <span id="cartTotal" class="text-brand-gold text-xl">$0 MXN</span>
+                    </div>
+                </div>
+
+                <button onclick="checkout()" class="w-full py-3.5 bg-gradient-to-r from-brand-green to-brand-darkGreen hover:from-emerald-400 hover:to-brand-green text-slate-950 font-extrabold uppercase text-sm rounded-xl tracking-wider shadow-lg transition-all">
+                    Proceder al Checkout
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- NOTIFICACIÓN TOAST -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 bg-slate-900 border border-brand-green/40 text-white px-5 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3">
+        <div class="p-1.5 bg-brand-green/20 rounded-full text-brand-green">
+            <i data-lucide="check" class="w-4 h-4"></i>
+        </div>
+        <span id="toastMessage" class="text-xs font-bold">Producto añadido al carrito</span>
+    </div>
+
+    <!-- JAVASCRIPT DE LA APLICACIÓN -->
+    <script>
+        // BASE DE DATOS DE PRODUCTOS
+        const products = [
+            {
+                id: 1,
+                name: "Real Madrid Kit Local 25/26",
+                league: "LaLiga",
+                price: 1499,
+                originalPrice: 1799,
+                badge: "Más Vendido",
+                rating: 5,
+                image: "https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&q=80&w=600"
+            },
+            {
+                id: 2,
+                name: "FC Barcelona Visita 25/26",
+                league: "LaLiga",
+                price: 1399,
+                originalPrice: 1699,
+                badge: "Oferta",
+                rating: 5,
+                image: "https://images.unsplash.com/photo-1508098682722-e99c43a406b2?auto=format&fit=crop&q=80&w=600"
+            },
+            {
+                id: 3,
+                name: "Manchester City Home 25/26",
+                league: "Premier",
+                price: 1449,
+                originalPrice: 1749,
+                badge: "Nuevo",
+                rating: 4,
+                image: "https://images.unsplash.com/photo-1518091043644-c1d4457512c6?auto=format&fit=crop&q=80&w=600"
+            },
+            {
+                id: 4,
+                name: "México Selección Local 2026",
+                league: "Selecciones",
+                price: 1599,
+                originalPrice: 1899,
+                badge: "Mundial 2026",
+                rating: 5,
+                image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&q=80&w=600"
+            },
+            {
+                id: 5,
+                name: "Arsenal FC Third Kit 25/26",
+                league: "Premier",
+                price: 1399,
+                originalPrice: 1599,
+                badge: "Nuevo",
+                rating: 5,
+                image: "https://images.unsplash.com/photo-1579952363873-27f3bade9f55?auto=format&fit=crop&q=80&w=600"
+            },
+            {
+                id: 6,
+                name: "Argentina Selección 3 Estrellas",
+                league: "Selecciones",
+                price: 1699,
+                originalPrice: 1999,
+                badge: "Oferta",
+                rating: 5,
+                image: "https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&q=80&w=600"
+            },
+            {
+                id: 7,
+                name: "Brasil Retro 1998 Ronaldo #9",
+                league: "Retro",
+                price: 1299,
+                originalPrice: 1499,
+                badge: "Edición Retro",
+                rating: 5,
+                image: "https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&q=80&w=600"
+            },
+            {
+                id: 8,
+                name: "AC Milan Home Kit 25/26",
+                league: "SerieA",
+                price: 1399,
+                originalPrice: 1599,
+                badge: "Nuevo",
+                rating: 4,
+                image: "https://images.unsplash.com/photo-1560272564-6695203892b3?auto=format&fit=crop&q=80&w=600"
+            }
+        ];
+
+        // ESTADO GLOBAL DEL CARRITO Y TALLAS SELECCIONADAS
+        let cart = [];
+        let selectedSizes = {};
+        let currentColor = '#ffffff';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            renderProducts(products);
+            setupEventListeners();
+        });
+
+        function setupEventListeners() {
+            // Menú móvil
+            const mobileBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            mobileBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Abrir y cerrar Carrito
+            document.getElementById('openCartBtn').addEventListener('click', openCart);
+            document.getElementById('closeCartBtn').addEventListener('click', closeCart);
+            document.getElementById('cartOverlay').addEventListener('click', closeCart);
+
+            // Inputs Personalización
+            const nameInput = document.getElementById('customNameInput');
+            const numberInput = document.getElementById('customNumberInput');
+            const previewName = document.getElementById('previewName');
+            const previewNumber = document.getElementById('previewNumber');
+
+            nameInput.addEventListener('input', (e) => {
+                previewName.textContent = e.target.value.trim() ? e.target.value.toUpperCase() : 'TU NOMBRE';
+            });
+
+            numberInput.addEventListener('input', (e) => {
+                previewNumber.textContent = e.target.value ? e.target.value : '10';
+            });
+        }
+
+        // RENDERIZAR PRODUCTOS
+        function renderProducts(items) {
+            const grid = document.getElementById('productsGrid');
+            grid.innerHTML = '';
+
+            items.forEach(product => {
+                // Talla por defecto si no existe
+                if (!selectedSizes[product.id]) {
+                    selectedSizes[product.id] = 'M';
+                }
+
+                const productCard = document.createElement('div');
+                productCard.className = "bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden hover:border-slate-700 transition-all duration-300 flex flex-col group";
+
+                productCard.innerHTML = `
+                    <div class="relative overflow-hidden aspect-[4/3] bg-slate-950">
+                        <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 bg-brand-green/90 text-slate-950 font-extrabold text-[10px] px-2.5 py-1 rounded-full uppercase tracking-wider backdrop-blur-sm">
+                            ${product.badge}
+                        </span>
+                    </div>
+
+                    <div class="p-5 flex-1 flex flex-col justify-between space-y-4">
+                        <div>
+                            <div class="flex items-center justify-between text-xs text-slate-400 mb-1">
+                                <span class="uppercase font-semibold text-brand-green">${product.league}</span>
+                                <div class="flex items-center text-brand-gold">
+                                    <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
+                                    <span class="ml-1 text-xs font-bold text-slate-300">${product.rating}.0</span>
+                                </div>
+                            </div>
+                            <h3 class="font-bold text-white text-base group-hover:text-brand-green transition-colors">${product.name}</h3>
+                        </div>
+
+                        <!-- Selector de Tallas -->
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-400 uppercase mb-1.5">Seleccionar Talla:</label>
+                            <div class="flex items-center gap-1.5">
+                                ${['S', 'M', 'L', 'XL'].map(size => `
+                                    <button onclick="selectSize(${product.id}, '${size}')" id="size-btn-${product.id}-${size}" class="size-btn-${product.id} flex-1 py-1 text-xs font-bold rounded-lg border transition-all ${selectedSizes[product.id] === size ? 'bg-brand-green text-slate-950 border-brand-green' : 'bg-slate-950 text-slate-300 border-slate-800 hover:border-slate-600'}">
+                                        ${size}
+                                    </button>
+                                `).join('')}
+                            </div>
+                        </div>
+
+                        <div class="pt-2 border-t border-slate-800/80 flex items-center justify-between">
+                            <div>
+                                <span class="text-xs text-slate-500 line-through">${product.originalPrice} MXN</span>
+                                <p class="text-lg font-extrabold text-white">${product.price} MXN</p>
+                            </div>
+                            <button onclick="addToCart(${product.id})" class="px-3.5 py-2 bg-brand-green hover:bg-emerald-400 text-slate-950 rounded-xl text-xs font-extrabold uppercase transition-colors flex items-center gap-1">
+                                <i data-lucide="shopping-bag" class="w-3.5 h-3.5"></i> Añadir
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(productCard);
+            });
+
+            lucide.createIcons();
+        }
+
+        // CAMBIAR TALLA DE PRODUCTO
+        function selectSize(productId, size) {
+            selectedSizes[productId] = size;
+            const buttons = document.querySelectorAll(`.size-btn-${productId}`);
+            buttons.forEach(btn => {
+                btn.className = `size-btn-${productId} flex-1 py-1 text-xs font-bold rounded-lg border transition-all bg-slate-950 text-slate-300 border-slate-800 hover:border-slate-600`;
+            });
+            const activeBtn = document.getElementById(`size-btn-${productId}-${size}`);
+            if (activeBtn) {
+                activeBtn.className = `size-btn-${productId} flex-1 py-1 text-xs font-bold rounded-lg border transition-all bg-brand-green text-slate-950 border-brand-green`;
+            }
+        }
+
+        // COLOR TIPOGRAFÍA PERSONALIZACIÓN
+        function setDorsalColor(color) {
+            currentColor = color;
+            document.getElementById('previewName').style.color = color;
+            document.getElementById('previewNumber').style.color = color;
+        }
+
+        // AÑADIR JERSEY PERSONALIZADO AL CARRITO
+        function addCustomJerseyToCart() {
+            const name = document.getElementById('customNameInput').value.trim() || 'PERSONALIZADO';
+            const number = document.getElementById('customNumberInput').value || '10';
+
+            const customItem = {
+                id: 'custom-' + Date.now(),
+                name: `Jersey Personalizado (${name.toUpperCase()} #${number})`,
+                price: 1699,
+                size: 'M',
+                quantity: 1,
+                image: 'https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&q=80&w=600'
+            };
+
+            cart.push(customItem);
+            updateCartUI();
+            openCart();
+            showToast('Jersey personalizado añadido');
+        }
+
+        // FILTRADO
+        function filterProducts(category, event) {
+            if (event) {
+                const buttons = document.querySelectorAll('.filter-btn');
+                buttons.forEach(btn => {
+                    btn.classList.remove('bg-brand-green', 'text-slate-950', 'active');
+                    btn.classList.add('bg-slate-900', 'text-slate-400');
+                });
+                event.target.classList.remove('bg-slate-900', 'text-slate-400');
+                event.target.classList.add('bg-brand-green', 'text-slate-950', 'active');
+            }
+
+            if (category === 'all') {
+                renderProducts(products);
+            } else {
+                const filtered = products.filter(p => p.league === category);
+                renderProducts(filtered);
+            }
+        }
+
+        function filterLeague(leagueName) {
+            const section = document.getElementById('productos');
+            section.scrollIntoView({ behavior: 'smooth' });
+            filterProducts(leagueName, null);
+        }
+
+        function handleSearch(e) {
+            const query = e.target.value.toLowerCase();
+            const filtered = products.filter(p => p.name.toLowerCase().includes(query) || p.league.toLowerCase().includes(query));
+            renderProducts(filtered);
+        }
+
+        // LÓGICA DEL CARRITO
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const size = selectedSizes[productId] || 'M';
+            const cartItemId = `${productId}-${size}`;
+
+            const existingItem = cart.find(item => item.cartItemId === cartItemId);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    ...product,
+                    cartItemId,
+                    size,
+                    quantity: 1
+                });
+            }
+
+            updateCartUI();
+            openCart();
+            showToast(`Añadido: ${product.name} (Talla ${size})`);
+        }
+
+        function removeFromCart(cartItemId) {
+            cart = cart.filter(item => (item.cartItemId || item.id) !== cartItemId);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const container = document.getElementById('cartItemsContainer');
+            const badge = document.getElementById('cartCountBadge');
+            const subtotalEl = document.getElementById('cartSubtotal');
+            const totalEl = document.getElementById('cartTotal');
+
+            const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
+            const totalPrice = cart.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+
+            badge.textContent = totalItems;
+            if (totalItems > 0) {
+                badge.classList.remove('scale-0');
+                badge.classList.add('scale-100');
+            } else {
+                badge.classList.remove('scale-100');
+                badge.classList.add('scale-0');
+            }
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 space-y-3">
+                        <i data-lucide="shopping-bag" class="w-12 h-12 text-slate-700 mx-auto"></i>
+                        <p class="text-slate-400 text-sm">Tu carrito está vacío.</p>
+                    </div>
+                `;
+            } else {
+                container.innerHTML = '';
+                cart.forEach(item => {
+                    const idKey = item.cartItemId || item.id;
+                    const itemEl = document.createElement('div');
+                    itemEl.className = "flex items-center gap-3 p-3 bg-slate-950 rounded-xl border border-slate-800";
+                    itemEl.innerHTML = `
+                        <img src="${item.image}" class="w-16 h-16 object-cover rounded-lg">
+                        <div class="flex-1">
+                            <h4 class="text-xs font-bold text-white">${item.name}</h4>
+                            <p class="text-[11px] text-brand-green font-bold">Talla: ${item.size}</p>
+                            <p class="text-xs text-brand-gold font-bold mt-1">$${item.price} MXN x ${item.quantity}</p>
+                        </div>
+                        <button onclick="removeFromCart('${idKey}')" class="p-1.5 text-slate-500 hover:text-red-400">
+                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                        </button>
+                    `;
+                    container.appendChild(itemEl);
+                });
+            }
+
+            subtotalEl.textContent = `$${totalPrice.toLocaleString()} MXN`;
+            totalEl.textContent = `$${totalPrice.toLocaleString()} MXN`;
+
+            lucide.createIcons();
+        }
+
+        function openCart() {
+            const modal = document.getElementById('cartModal');
+            const overlay = document.getElementById('cartOverlay');
+            const drawer = document.getElementById('cartDrawer');
+
+            modal.classList.remove('invisible');
+            setTimeout(() => {
+                overlay.classList.add('opacity-100');
+                drawer.classList.remove('translate-x-full');
+            }, 10);
+        }
+
+        function closeCart() {
+            const modal = document.getElementById('cartModal');
+            const overlay = document.getElementById('cartOverlay');
+            const drawer = document.getElementById('cartDrawer');
+
+            overlay.classList.remove('opacity-100');
+            drawer.classList.add('translate-x-full');
+            setTimeout(() => {
+                modal.classList.add('invisible');
+            }, 300);
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                showToast('Tu carrito está vacío');
+                return;
+            }
+            alert('¡Gracias por tu pedido! Redirigiendo a la pasarela de pago...');
+            cart = [];
+            updateCartUI();
+            closeCart();
+        }
+
+        function handleNewsletter(e) {
+            e.preventDefault();
+            showToast('¡Gracias por suscribirte al club!');
+            e.target.reset();
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMessage');
+
+            toastMsg.textContent = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
